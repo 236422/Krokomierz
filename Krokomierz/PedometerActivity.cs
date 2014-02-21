@@ -1,71 +1,63 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
 using Android.Hardware;
-using System.Text;
-using System.Threading;
 
 namespace Krokomierz
 {
-    [Activity(Label = "Krokomierz", MainLauncher = true, Icon = "@drawable/icon")]
-    public class Activity1 : Activity, ISensorEventListener
+    [Activity(Label = "Pedometer Activity")]
+    public class PedometerActivity : Activity, ISensorEventListener
     {
-        //int count = 1;
         int kroki = 0;
-        private SensorManager _sensorManager; 
-        private TextView _sensorTextView; 
+        private SensorManager _sensorManager;
+        private static TextView _sensorTextView;
         private static readonly object _syncLock = new object();
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
-
-            // Get our button from the layout resource,
-            // and attach an event to it
-            //Button button = FindViewById<Button>(Resource.Id.MyButton);
-
-            //button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            base.OnCreate(savedInstanceState);
 
             _sensorManager = (SensorManager)GetSystemService(Context.SensorService);
-            _sensorTextView = FindViewById<TextView>(Resource.Id.accelerometer_text);
+            _sensorManager.RegisterListener(this, _sensorManager.GetDefaultSensor(SensorType.All), SensorDelay.Normal);
+            _sensorTextView = new TextView(this);//FindViewById<TextView>(Resource.Id.accelerometer_text);
 
             int h = 480;
             mYOffset = h * 0.5f;
-            mScale[0] = - (h * 0.5f * (1.0f / (SensorManager.StandardGravity * 2)));
-            mScale[1] = - (h * 0.5f * (1.0f / (SensorManager.MagneticFieldEarthMax)));
+            mScale[0] = -(h * 0.5f * (1.0f / (SensorManager.StandardGravity * 2)));
+            mScale[1] = -(h * 0.5f * (1.0f / (SensorManager.MagneticFieldEarthMax)));
+
+            SetContentView(_sensorTextView);
         }
 
         public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
         {
-            // We don't want to do anything here.
+            //nothing to do
         }
 
         private float mLimit = 10;
-        private float[] mLastValues = new float[3*2];
+        private float[] mLastValues = new float[3 * 2];
         private float[] mScale = new float[2];
         private float mYOffset;
 
-        private float[] mLastDirections = new float[3*2];
-        private float[][] mLastExtremes = { new float[3*2], new float[3*2] };
-        private float[] mLastDiff = new float[3*2];
+        private float[] mLastDirections = new float[3 * 2];
+        private float[][] mLastExtremes = { new float[3 * 2], new float[3 * 2] };
+        private float[] mLastDiff = new float[3 * 2];
         private int mLastMatch = -1;
-
-
 
         public void OnSensorChanged(SensorEvent e)
         {
             lock (_syncLock)
             {
                 StringBuilder text = new StringBuilder();
-                
+
                 if (e.Sensor.Type == SensorType.Orientation)
                 {
                     //nothing
@@ -117,19 +109,5 @@ namespace Krokomierz
                 _sensorTextView.Text = text.ToString();
             }
         }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            _sensorManager.RegisterListener(this, _sensorManager.GetDefaultSensor(SensorType.All), SensorDelay.Normal);
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-            _sensorManager.UnregisterListener(this);
-        }
-
     }
 }
-
