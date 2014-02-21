@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <AndroidSupportedAbis>armeabi%3barmeabi-v7a</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -70,13 +70,11 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\ic_tab_options.xml" />
     <AndroidResource Include="Resources\Drawable\ic_tab_pedometer.xml" />
     <AndroidResource Include="Resources\Drawable\ic_tab_white.png" />
+    <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
