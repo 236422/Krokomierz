@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:isScrollContainer="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbars="vertical"
+    android:scrollbarAlwaysDrawHorizontalTrack="true"
+    android:scrollbarStyle="insideOverlay"
+    android:scrollbarSize="20dp">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayout1"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical">
+            <TextView
+                android:text="Waga [kg] (do obliczenia kalorii)"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/weightInput"
+                android:numeric="decimal"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:text="Długość kroku [cm]"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/stepSizeInput"
+                android:numeric="decimal"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:text="Czułość urządzenia"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <SeekBar
+                    android:id="@+id/sensivityInput"
+                    android:max="50"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent" />
+                <TextView
+                    android:text="%"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/tsensivityOutput"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

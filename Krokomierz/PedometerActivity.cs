@@ -27,6 +27,7 @@ namespace Krokomierz
         float MWF = 0.73f;
         DateTime? dt;
         bool threadFlag = true;
+        Chronometer chrono; //todo
 
         private SensorManager sensorManager;
         private TextView stepsTextView;

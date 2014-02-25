@@ -20,7 +20,7 @@ namespace Krokomierz
             base.OnCreate(savedInstanceState);
             TextView textview = new TextView(this);
             textview.Text = "To s¹ opcje!";
-            SetContentView(textview);
+            SetContentView(Resource.Layout.Options);
 
         }
     }
