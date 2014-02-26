@@ -32,7 +32,7 @@ namespace Krokomierz
 
             weightInput.Text = MainActivity.weight.ToString();
             stepSizeInput.Text = MainActivity.stepLength.ToString();
-            sensivityInput.Progress = MainActivity.mLimit;
+            sensivityInput.Progress = sensivityInput.Max - MainActivity.mLimit;
         }
 
         public void OnProgressChanged(SeekBar seekBar, int progress, bool fromUser)

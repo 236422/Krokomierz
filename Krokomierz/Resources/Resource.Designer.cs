@@ -75,14 +75,17 @@ namespace Krokomierz
 			// aapt resource value: 0x7f060005
 			public const int calories = 2131099653;
 			
+			// aapt resource value: 0x7f060009
+			public const int chronometer1 = 2131099657;
+			
 			// aapt resource value: 0x7f060007
 			public const int distance = 2131099655;
 			
 			// aapt resource value: 0x7f060004
 			public const int pedometer = 2131099652;
 			
-			// aapt resource value: 0x7f06000a
-			public const int reset = 2131099658;
+			// aapt resource value: 0x7f06000b
+			public const int reset = 2131099659;
 			
 			// aapt resource value: 0x7f060002
 			public const int sensivityInput = 2131099650;
@@ -93,8 +96,8 @@ namespace Krokomierz
 			// aapt resource value: 0x7f060006
 			public const int speed = 2131099654;
 			
-			// aapt resource value: 0x7f060009
-			public const int startstop = 2131099657;
+			// aapt resource value: 0x7f06000a
+			public const int startstop = 2131099658;
 			
 			// aapt resource value: 0x7f060001
 			public const int stepSizeInput = 2131099649;
