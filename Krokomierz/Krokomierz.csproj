@@ -19,7 +19,7 @@
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
-    <TargetFrameworkVersion>v4.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.2</TargetFrameworkVersion>
     <JavaMaximumHeapSize />
     <JavaOptions />
   </PropertyGroup>
@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

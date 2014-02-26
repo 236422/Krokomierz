@@ -2,13 +2,9 @@ using System;
 
 using Android.App;
 using Android.Content;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Hardware;
-using System.Text;
-using System.Threading;
 
 namespace Krokomierz
 {
@@ -66,7 +62,6 @@ namespace Krokomierz
             prefEditor.PutFloat("stepLength", stepLength);
             prefEditor.PutFloat("weight", weight);
             prefEditor.PutInt("mLimit", mLimit);
-            prefEditor.Apply();
             prefEditor.Commit();
         }
 
