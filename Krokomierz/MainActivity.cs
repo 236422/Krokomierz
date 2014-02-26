@@ -15,9 +15,15 @@ namespace Krokomierz
     [Activity(Label = "Krokomierz", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : TabActivity
     {
+        public static float stepLength;
+        public static float weight;
+        public static int mLimit;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            retrieveset();
 
             SetContentView(Resource.Layout.Main);
 
@@ -36,6 +42,31 @@ namespace Krokomierz
             spec.SetContent(intent);
 
             TabHost.AddTab(spec);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            saveset();
+        }
+
+        protected void saveset()
+        {
+            var prefs = Application.Context.GetSharedPreferences("Krokomierz", FileCreationMode.Private);
+            var prefEditor = prefs.Edit();
+            prefEditor.PutFloat("stepLength", stepLength);
+            prefEditor.PutFloat("weight", weight);
+            prefEditor.PutInt("mLimit", mLimit);
+            prefEditor.Apply();
+            prefEditor.Commit();
+        }
+
+        protected void retrieveset()
+        {
+            var prefs = Application.Context.GetSharedPreferences("Krokomierz", FileCreationMode.Private);
+            stepLength = prefs.GetFloat("stepLength", 50.0f);
+            weight = prefs.GetFloat("weight", 80.0f);
+            mLimit = prefs.GetInt("mLimit", 13);
         }
     }
 }

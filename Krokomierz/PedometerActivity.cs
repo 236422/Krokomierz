@@ -22,8 +22,8 @@ namespace Krokomierz
         float calories = 0;
         float speed = 0.0f;
         float distance = 0.0f;
-        float stepLength = 50.0f;
-        float weight = 80.0f;
+        //float stepLength = 50.0f;
+        //float weight = 80.0f;
         float MWF = 0.73f;
         DateTime? dt;
         bool threadFlag = true;
@@ -183,7 +183,7 @@ namespace Krokomierz
             //nothing to do
         }
 
-        private float mLimit = 13; // 1.97  2.96  4.44  6.66  10.00  15.00  22.50  33.75  50.62
+        //private float mLimit = 13; // 1.97  2.96  4.44  6.66  10.00  15.00  22.50  33.75  50.62
         private float[] mLastValues = new float[3 * 2];
         private float[] mScale = new float[2];
         private float mYOffset;
@@ -222,7 +222,7 @@ namespace Krokomierz
                             mLastExtremes[extType][k] = mLastValues[k];
                             float diff = Math.Abs(mLastExtremes[extType][k] - mLastExtremes[1 - extType][k]);
 
-                            if (diff > mLimit)
+                            if (diff > MainActivity.mLimit)
                             {
                                 bool isAlmostAsLargeAsPrevious = diff > (mLastDiff[k] * 2 / 3);
                                 bool isPreviousLargeEnough = mLastDiff[k] > (diff / 3);
@@ -231,8 +231,8 @@ namespace Krokomierz
                                 if (isAlmostAsLargeAsPrevious && isPreviousLargeEnough && isNotContra)
                                 {
                                     steps++;
-                                    distance += stepLength;
-                                    calories += weight * MWF * stepLength / 100000;
+                                    distance += MainActivity.stepLength;
+                                    calories += MainActivity.weight * MWF * MainActivity.stepLength / 100000;
                                     mLastMatch = extType;
                                 }
                                 else

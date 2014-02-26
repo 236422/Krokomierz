@@ -21,7 +21,6 @@
             android:minHeight="25px"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/linearLayout1"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical">
             <TextView
@@ -69,7 +68,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:id="@+id/tsensivityOutput"
+                    android:id="@+id/sensivityOutput"
                     android:gravity="center" />
             </LinearLayout>
         </LinearLayout>
