@@ -12,8 +12,8 @@ using System.Threading;
 
 namespace Krokomierz
 {
-    [Activity(Label = "Krokomierz", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : TabActivity
+    [Activity(Label = "Krokomierz", Icon = "@drawable/icon")]
+    public class MainActivity : TabActivity, IDialogInterfaceOnClickListener, IDialogInterfaceOnCancelListener
     {
         public static float stepLength;
         public static float weight;
@@ -22,13 +22,22 @@ namespace Krokomierz
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            SetContentView(Resource.Layout.Main);
             retrieveset();
 
-            SetContentView(Resource.Layout.Main);
-
-            CreateTab(typeof(PedometerActivity), "pedometer", "Krokomierz", Resource.Drawable.ic_tab_pedometer);
-            CreateTab(typeof(OptionsActivity), "options", "Opcje", Resource.Drawable.ic_tab_options);
+            SensorManager sensorManager = (SensorManager)GetSystemService(SensorService);
+            Sensor accelerometerSensor = sensorManager.GetDefaultSensor(SensorType.Accelerometer);
+            
+            if (accelerometerSensor != null)
+            {
+                CreateTab(typeof(PedometerActivity), "pedometer", "Krokomierz", Resource.Drawable.ic_tab_pedometer);
+                CreateTab(typeof(OptionsActivity), "options", "Opcje", Resource.Drawable.ic_tab_options);
+            }
+            else
+            {
+                string mess = "Twoje urz¹dzenie nie jest wspierane - nie posiada akcelerometru";
+                AlertDialog ad = new AlertDialog.Builder(this).SetMessage(mess).SetPositiveButton("Zamknij", this).SetOnCancelListener(this).Show();
+            }
         }
 
         private void CreateTab(Type activityType, string tag, string label, int drawableId)
@@ -67,6 +76,16 @@ namespace Krokomierz
             stepLength = prefs.GetFloat("stepLength", 50.0f);
             weight = prefs.GetFloat("weight", 80.0f);
             mLimit = prefs.GetInt("mLimit", 13);
+        }
+
+        public void OnClick(IDialogInterface dialog, int which)
+        {
+            this.Finish();
+        }
+
+        public void OnCancel(IDialogInterface dialog)
+        {
+            this.Finish();
         }
     }
 }

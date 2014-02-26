@@ -58,6 +58,7 @@
     <Compile Include="PedometerActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -74,6 +75,9 @@
     <AndroidResource Include="Resources\Layout\Options.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\NotSupported.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml" />
@@ -87,12 +91,14 @@
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\ic_tab_options.xml" />
     <AndroidResource Include="Resources\Drawable\ic_tab_pedometer.xml" />
-    <AndroidResource Include="Resources\Drawable\ic_tab_white.png" />
     <AndroidResource Include="Resources\Drawable\Icon.png" />
     <AndroidResource Include="Resources\Drawable\RoundedCorners.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Menu\ActionMenu.xml" />
+    <AndroidResource Include="Resources\Drawable\splash.png" />
+    <AndroidResource Include="Resources\Values\Styles.xml" />
+    <AndroidResource Include="Resources\Drawable\ic_tab_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

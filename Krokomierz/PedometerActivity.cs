@@ -33,8 +33,8 @@ namespace Krokomierz
         private TextView timeTextView;
         private bool run;
         private static readonly object syncLock = new object();
-        PowerManager powerManager;
-        PowerManager.WakeLock wakeLock;
+        private PowerManager powerManager;
+        private PowerManager.WakeLock wakeLock;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
