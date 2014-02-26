@@ -18,11 +18,11 @@ namespace Krokomierz
     [Activity(Label = "Pedometer Activity")]
     public class PedometerActivity : Activity, ISensorEventListener, Chronometer.IOnChronometerTickListener
     {
-        int steps = 0;
-        float calories = 0;
-        float speed = 0.0f;
-        float distance = 0.0f;
-        float MWF = 0.73f;
+        private int steps = 0;
+        private float calories = 0;
+        private float speed = 0.0f;
+        private float distance = 0.0f;
+        private float MWF = 0.73f;
         private Chronometer chrono;
         private Chronometer tmp;
         private SensorManager sensorManager;
@@ -31,19 +31,27 @@ namespace Krokomierz
         private TextView speedTextView;
         private TextView distanceTextView;
         private TextView timeTextView;
+        private bool run;
         private static readonly object syncLock = new object();
-        private bool run = false;
+        PowerManager powerManager;
+        PowerManager.WakeLock wakeLock;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
+            powerManager = (PowerManager)GetSystemService(Context.PowerService);
+            wakeLock = powerManager.NewWakeLock(WakeLockFlags.Partial, "MyWakeLock");
+            wakeLock.Acquire();
 
+            base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Pedometer);
 
             chrono = FindViewById<Chronometer>(Resource.Id.chronometer1);
-            chrono.Format = "00:0%s";
-
-            tmp = null;
+            sensorManager = (SensorManager)GetSystemService(Context.SensorService);
+            stepsTextView = FindViewById<TextView>(Resource.Id.pedometer);
+            caloriesTextView = FindViewById<TextView>(Resource.Id.calories);
+            speedTextView = FindViewById<TextView>(Resource.Id.speed);
+            distanceTextView = FindViewById<TextView>(Resource.Id.distance);
+            timeTextView = FindViewById<TextView>(Resource.Id.time);
 
             if (savedInstanceState != null)
             {
@@ -55,13 +63,7 @@ namespace Krokomierz
                 run = savedInstanceState.GetBoolean("run", false);
             }
 
-            sensorManager = (SensorManager)GetSystemService(Context.SensorService);
-            stepsTextView = FindViewById<TextView>(Resource.Id.pedometer);
-            caloriesTextView = FindViewById<TextView>(Resource.Id.calories);
-            speedTextView = FindViewById<TextView>(Resource.Id.speed);
-            distanceTextView = FindViewById<TextView>(Resource.Id.distance);
-            timeTextView = FindViewById<TextView>(Resource.Id.time);
-
+            chrono.Format = "00:0%s";
             chrono.OnChronometerTickListener = this;
 
             int h = 480;
@@ -72,26 +74,15 @@ namespace Krokomierz
             if (run)
             {
                 refreshTextViews();
-                sensorManager.RegisterListener(this, sensorManager.GetDefaultSensor(SensorType.All), SensorDelay.Fastest);
+                sensorsListenerRegister();
                 chrono.Start();
             }
-
-            //TODO
-            //liczenie przy uspieniu - SERVICE
         }
 
-        protected override void OnStop()
+        private void sensorsListenerRegister()
         {
-            base.OnStop();
-            if (run)
-            {
-                System.Diagnostics.Debug.WriteLine("run");
-                sensorManager.RegisterListener(this, sensorManager.GetDefaultSensor(SensorType.All), SensorDelay.Fastest);
-            }
-            else
-                System.Diagnostics.Debug.WriteLine("stop");
+            sensorManager.RegisterListener(this, sensorManager.GetDefaultSensor(SensorType.All), SensorDelay.Normal);
         }
-
 
         private void refreshTextViews()
         {
@@ -132,8 +123,7 @@ namespace Krokomierz
             {
                 if (!run)
                 {
-                    sensorManager.RegisterListener(this, sensorManager.GetDefaultSensor(SensorType.All), SensorDelay.Fastest);
-
+                    sensorsListenerRegister();
                     if (tmp == null)
                         chrono.Base = SystemClock.ElapsedRealtime();
                     else
@@ -220,9 +210,7 @@ namespace Krokomierz
                                     mLastMatch = extType;
                                 }
                                 else
-                                {
                                     mLastMatch = -1;
-                                }
                             }
                             mLastDiff[k] = diff;
                         }
@@ -233,7 +221,6 @@ namespace Krokomierz
                 stepsTextView.Text = steps.ToString();
                 distanceTextView.Text = (distance / 100000).ToString();
                 caloriesTextView.Text = ((int)calories).ToString();
-
             }
         }
 
