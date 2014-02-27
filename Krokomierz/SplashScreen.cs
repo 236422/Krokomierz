@@ -23,7 +23,6 @@ namespace Krokomierz
 
         private void startMethod()
         {
-            System.Diagnostics.Debug.WriteLine("start");
             Thread.Sleep(2000);
             StartActivity(typeof(MainActivity));
             this.Finish();
