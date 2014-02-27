@@ -4,15 +4,30 @@ using System.Threading;
 
 namespace Krokomierz
 {
-    [Activity(Theme = "@style/Theme.Splash", Label = "Krokomierz", MainLauncher = true, NoHistory = true, 
-        Icon = "@drawable/icon", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Theme = "@style/Theme.Main", Label = "Krokomierz", NoHistory = true, MainLauncher = true, Icon = "@drawable/icon")]
     public class SplashScreen : Activity
     {
+        static Thread thread;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            Thread.Sleep(1000);
-            StartActivity(typeof(MainActivity));
+            
+            SetContentView(Resource.Layout.Splash);
+            if (thread==null)
+            {
+                thread = new Thread(new ThreadStart(startMethod));
+                thread.Start();
+            }
         }
+
+        private void startMethod()
+        {
+            System.Diagnostics.Debug.WriteLine("start");
+            Thread.Sleep(2000);
+            StartActivity(typeof(MainActivity));
+            this.Finish();
+        }
+
     }
 }

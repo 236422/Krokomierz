@@ -128,13 +128,13 @@ namespace Krokomierz
 			public const int Main = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int NotSupported = 2130903041;
+			public const int Options = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Options = 2130903042;
+			public const int Pedometer = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Pedometer = 2130903043;
+			public const int Splash = 2130903043;
 			
 			static Layout()
 			{
@@ -182,7 +182,7 @@ namespace Krokomierz
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int Theme_Splash = 2131034112;
+			public const int Theme_Main = 2131034112;
 			
 			static Style()
 			{
