@@ -3,7 +3,6 @@
   <style name="Theme.Main" parent="android:Theme">
     <item name="android:windowNoTitle">true</item>
     <item name="android:background">#000000</item>
-    <item name="android:colorBackground">#000000</item>
   </style>
 </resources>
 

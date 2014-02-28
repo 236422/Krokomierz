@@ -5,10 +5,11 @@ using Android.Content;
 using Android.Widget;
 using Android.OS;
 using Android.Hardware;
+using Android.Views;
 
 namespace Krokomierz
 {
-    [Activity(Label = "Krokomierz", Icon = "@drawable/icon")]
+    [Activity(Label = "Krokomierz", NoHistory=true, Icon = "@drawable/icon")]
     public class MainActivity : TabActivity, IDialogInterfaceOnClickListener, IDialogInterfaceOnCancelListener
     {
         public static float stepLength;

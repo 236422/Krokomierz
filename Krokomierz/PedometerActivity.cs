@@ -9,7 +9,7 @@ using Android.Hardware;
 
 namespace Krokomierz
 {
-    [Activity(Label = "Pedometer Activity")]
+    [Activity(Label = "Pedometer Activity", NoHistory=true)]
     public class PedometerActivity : Activity, ISensorEventListener, Chronometer.IOnChronometerTickListener
     {
         private int steps = 0;
@@ -91,8 +91,7 @@ namespace Krokomierz
         public override bool OnMenuOpened(int featureId, IMenu menu)
         {
             menu.Clear();
-            MenuInflater inflater = MenuInflater;
-            inflater.Inflate(Resource.Menu.ActionMenu, menu);
+            MenuInflater.Inflate(Resource.Menu.ActionMenu, menu);
 
             if (run)
                 menu.FindItem(Resource.Id.startstop).SetTitle("Stop");
@@ -100,6 +99,7 @@ namespace Krokomierz
                 menu.FindItem(Resource.Id.startstop).SetTitle("Start");
             return base.OnMenuOpened(featureId, menu);
         }
+    
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

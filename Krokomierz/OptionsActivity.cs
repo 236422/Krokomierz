@@ -1,10 +1,11 @@
 using Android.App;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 
 namespace Krokomierz
 {
-    [Activity(Label = "Options Activity")]
+    [Activity(Label = "Options Activity", NoHistory=true)]
     public class OptionsActivity : Activity, SeekBar.IOnSeekBarChangeListener
     {
         private EditText weightInput;

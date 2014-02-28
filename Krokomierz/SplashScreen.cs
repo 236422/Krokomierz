@@ -1,5 +1,6 @@
 using Android.App;
 using Android.OS;
+using Android.Widget;
 using System.Threading;
 
 namespace Krokomierz
@@ -14,18 +15,22 @@ namespace Krokomierz
             base.OnCreate(bundle);
             
             SetContentView(Resource.Layout.Splash);
-            if (thread==null)
+            if (thread==null || thread.ThreadState == ThreadState.Stopped)
             {
                 thread = new Thread(new ThreadStart(startMethod));
                 thread.Start();
             }
         }
 
+        public override void OnBackPressed()
+        {
+            //nothing to do
+        }
+
         private void startMethod()
         {
             Thread.Sleep(2000);
             StartActivity(typeof(MainActivity));
-            this.Finish();
         }
 
     }
